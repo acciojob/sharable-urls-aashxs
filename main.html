@@ -1,8 +1,46 @@
 <!DOCTYPE html>
-<html>
-  <body>
-    <script type="text/javascript" src="./script.js">
-</script>
-  </body>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>URL Query String Manipulation</title>
+</head>
+<body>
+    <!-- Form with text input, number input, and submit button -->
+    <form id="urlForm">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name">
+        <br>
+        <label for="year">Year:</label>
+        <input type="number" id="year" name="year">
+        <br>
+        <button type="button" id="button">Submit</button>
+    </form>
 
+    <!-- Display the URL -->
+    <h3 id="url">https://localhost:8080/</h3>
+
+    <script>
+        document.getElementById('button').addEventListener('click', function() {
+            // Get the values from the input fields
+            const name = document.getElementById('name').value;
+            const year = document.getElementById('year').value;
+            
+            // Construct the query string
+            let queryString = '?';
+            if (name) {
+                queryString += `name=${encodeURIComponent(name)}`;
+            }
+            if (year) {
+                if (queryString !== '?') queryString += '&';
+                queryString += `year=${encodeURIComponent(year)}`;
+            }
+
+            // Update the URL in the h3 element
+            const baseUrl = 'https://localhost:8080/';
+            const fullUrl = baseUrl + queryString;
+            document.getElementById('url').textContent = fullUrl;
+        });
+    </script>
+</body>
 </html>
